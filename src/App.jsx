@@ -23,7 +23,7 @@ const cars = [
     year: 2021,
     km: "25.000 km",
     price: "R$ 265.000",
-    img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2"
+    img: "https://images.unsplash.com/photo-1726003536800-b9ec0888cf36?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXVkaSUyMGE0fGVufDB8fDB8fHww"
   }
 ];
 
@@ -127,7 +127,8 @@ function App() {
       {/* HERO */}
       <div className="hero">
         <video className="hero-video" autoPlay muted loop playsInline style={videoStyle}>
-          <source src="/video/car.mp4" type="video/mp4" />
+          {/* O BASE_URL agora vai entender sozinho se é '/' ou '/Rio-Elite-Cars/' */}
+          <source src={`${import.meta.env.BASE_URL}video/car.mp4`} type="video/mp4" />
         </video>
 
         <div className="hero-content" style={textStyle}>
@@ -175,7 +176,8 @@ function App() {
       <div className="grid reveal">
         {filteredCars.map((car) => (
           <div key={car.name} className="card">
-            <img src={car.img} />
+            {/* AJUSTE AQUI: Imagens do Unsplash são links externos, funcionam direto */}
+            <img src={car.img} alt={car.name} />
 
             <div className="card-content">
               <h3 className="card-title">{car.name}</h3>
@@ -229,7 +231,7 @@ function App() {
       </div>
 
       {/* WHATS */}
-      <a href="https://wa.me/55229988346411" target="_blank" className="whatsapp">
+      <a href="https://wa.me" target="_blank" className="whatsapp">
         💬
       </a>
 
