@@ -1,14 +1,9 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig(({ command, mode }) => {
-  // Carrega as variáveis de ambiente (incluindo as da Vercel)
-  const env = loadEnv(mode, process.cwd(), '')
-  
-  return {
-    // Se a Vercel estiver rodando o build, usa a raiz '/'. 
-    // Se for o build manual do GitHub, usa '/Rio-Elite-Cars/'.
-    base: env.VERCEL === 'true' ? '/' : (command === 'build' ? '/Rio-Elite-Cars/' : '/'),
-    plugins: [react()],
-  }
+export default defineConfig({
+  // A Vercel sempre injeta VERCEL_URL ou CI=true. 
+  // Se não detectar ambiente de CI, usa o caminho do GitHub.
+  base: process.env.VERCEL || process.env.CI ? '/' : '/Rio-Elite-Cars/',
+  plugins: [react()],
 })
